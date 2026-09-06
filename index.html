@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabinet Médical Bloc Carnot — Ophtalmologie & Pédiatrie, Dakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1B3A34;
+    --forest-light:#2C6E5E;
+    --sand:#F7F1E4;
+    --sand-deep:#EFE6D2;
+    --coral:#E8814A;
+    --coral-deep:#D3652C;
+    --ink:#26221C;
+    --paper:#FFFDF8;
+    --line: rgba(27,58,52,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:17.5px;
+    line-height:1.6;
+  }
+  h1,h2,h3,.disp{
+    font-family:'Fraunces', serif;
+    color:var(--forest);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,241,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand svg{width:32px;height:32px;flex-shrink:0;}
+  .brand-name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:var(--forest);}
+  .brand-sub{font-size:0.78rem;font-weight:600;color:#000000;margin-top:2px;line-height:1.3;}
+  .navlinks{display:flex;gap:28px;font-size:1.05rem;font-weight:700;align-items:center;}
+  .navlinks a{text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;}
+  .navlinks a:hover{border-color:var(--forest);}
+  .nav-item{position:relative;}
+  .nav-item > a{display:flex;align-items:center;gap:5px;cursor:pointer;}
+  .nav-item .caret{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .15s ease;}
+  .nav-item.open .caret{transform:rotate(-135deg);margin-top:3px;}
+  .dropdown{
+    position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(6px);
+    background:var(--paper);border:1px solid var(--line);
+    min-width:300px;padding:20px;
+    box-shadow:0 14px 32px rgba(27,58,52,0.14);
+    opacity:0;visibility:hidden;
+    transition:opacity .15s ease, transform .15s ease;
+    z-index:60;font-weight:400;font-size:0.95rem;
+  }
+  .nav-item:hover .dropdown,
+  .nav-item.open .dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+  .dropdown-group + .dropdown-group{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+  .dropdown-group h6{margin:0 0 8px;font-size:0.78rem;font-weight:700;letter-spacing:0.02em;color:var(--coral-deep);}
+  .dropdown-row{display:flex;justify-content:space-between;gap:16px;padding:6px 0;color:#000000;}
+  .dropdown-row span:last-child{white-space:nowrap;font-weight:600;color:var(--forest);}
+  .dropdown-foot{display:block;margin-top:14px;font-size:0.85rem;color:var(--forest);text-decoration:underline;}
+  .nav-cta{
+    background:var(--forest);color:var(--paper);
+    padding:10px 18px;border-radius:3px;text-decoration:none;
+    font-size:0.9rem;font-weight:500;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--forest-light);}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;}
+
+  .hero{
+    position:relative;
+    padding:76px 0 40px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  .eyebrow-plain{
+    color:var(--coral-deep);
+    font-weight:600;
+    font-size:0.95rem;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4vw, 3.4rem);
+    line-height:1.08;
+    font-weight:600;
+  }
+  .hero p.lead{
+    margin-top:22px;
+    font-size:1.1rem;
+    max-width:46ch;
+    color:#000000;
+  }
+  .hero-ctas{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:3px;
+    text-decoration:none;font-weight:500;font-size:0.98rem;
+    border:1px solid transparent;
+    transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--coral);color:var(--paper);}
+  .btn-primary:hover{background:var(--coral-deep);}
+  .btn-ghost{background:transparent;border-color:var(--forest);color:var(--forest);}
+  .btn-ghost:hover{background:var(--forest);color:var(--paper);}
+
+  .hero-tree{position:relative;}
+
+  .paths{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--sand-deep);
+  }
+  .paths-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .path-cell{
+    padding:34px 28px;
+    display:flex;gap:16px;align-items:flex-start;
+  }
+  .path-cell:first-child{border-right:1px solid var(--line);}
+  .path-cell .num{
+    font-family:'Fraunces',serif;font-size:1.6rem;color:var(--coral-deep);
+    line-height:1;
+  }
+  .path-cell h3{font-size:1.15rem;margin-bottom:6px;}
+  .path-cell p{margin:0;font-size:0.95rem;color:#000000;}
+
+  .section{padding:86px 0;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head .kicker{color:var(--coral-deep);font-weight:600;font-size:0.92rem;margin-bottom:10px;}
+  .section-head h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;}
+  .section-head p{margin-top:14px;color:#000000;font-size:1.02rem;}
+
+  .poles{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);}
+  .pole{background:var(--paper);padding:44px 38px;}
+  .pole-ophta{border-top:4px solid var(--forest);}
+  .pole-pedia{border-top:4px solid var(--coral);}
+  .pole-tag{font-size:0.85rem;font-weight:600;letter-spacing:0.02em;margin-bottom:10px;}
+  .pole-ophta .pole-tag{color:var(--forest);}
+  .pole-pedia .pole-tag{color:var(--coral-deep);}
+  .pole h3{font-size:1.6rem;margin-bottom:14px;}
+  .pole ul{list-style:none;margin:22px 0 0;padding:0;}
+  .pole li{
+    padding:12px 0;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:12px;font-size:0.97rem;
+  }
+  .pole li:last-child{border-bottom:1px solid var(--line);}
+  .pole li span.age{color:#8a8477;font-size:0.85rem;white-space:nowrap;}
+
+  .shared{
+    background:var(--forest);color:var(--sand);
+  }
+  .shared .section-head h2, .shared .section-head .kicker{color:var(--sand);}
+  .shared .section-head p{color:#cfe0da;}
+  .shared-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
+  }
+  .shared-item h4{
+    font-family:'Fraunces',serif;color:var(--sand);font-size:1.15rem;margin-bottom:10px;font-weight:500;
+  }
+  .shared-item p{color:#cfe0da;font-size:0.95rem;margin:0;}
+  .shared-item .mark{
+    display:inline-block;width:34px;height:2px;background:var(--coral);margin-bottom:16px;
+  }
+
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+  .team-card{
+    border:1px solid var(--line);background:var(--paper);padding:30px;
+  }
+  .team-card .role{color:var(--coral-deep);font-size:0.85rem;font-weight:600;margin-bottom:6px;}
+  .team-card h3{font-size:1.3rem;margin-bottom:10px;}
+  .team-card p{font-size:0.95rem;color:#000000;margin:0;}
+
+  .info-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  }
+  .hours-table{width:100%;border-collapse:collapse;margin-top:8px;}
+  .hours-table td{padding:10px 0;border-top:1px solid var(--line);font-size:0.97rem;}
+  .hours-table td:last-child{text-align:right;color:#000000;}
+  .addr-block p{margin:4px 0;font-size:0.97rem;}
+  .contact-row{
+    display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;
+  }
+
+  .cta-band{
+    background:var(--coral);color:var(--paper);
+    padding:64px 0;text-align:center;
+  }
+  .cta-band h2{color:var(--paper);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;}
+  .cta-band p{max-width:52ch;margin:16px auto 0;color:#fdece1;}
+  .cta-band .hero-ctas{justify-content:center;margin-top:30px;}
+  .cta-band .btn-primary{background:var(--forest);}
+  .cta-band .btn-primary:hover{background:var(--forest-light);}
+  .cta-band .btn-ghost{border-color:var(--paper);color:var(--paper);}
+  .cta-band .btn-ghost:hover{background:var(--paper);color:var(--coral-deep);}
+
+  footer{
+    background:var(--ink);color:#c9c4b8;padding:48px 0 28px;font-size:0.9rem;
+  }
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px;margin-bottom:32px;}
+  .foot-brand{font-family:'Fraunces',serif;color:var(--sand);font-size:1.1rem;margin-bottom:10px;}
+  footer a{text-decoration:none;color:#c9c4b8;}
+  footer a:hover{color:var(--sand);}
+  footer h5{color:var(--sand);font-size:0.85rem;margin:0 0 12px;font-weight:600;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;color:#8b8779;font-size:0.82rem;}
+
+  @media (max-width: 860px){
+    .navlinks{display:none;}
+    .menu-toggle{display:block;}
+    .brand-sub{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-tree{order:-1;max-width:220px;margin:0 auto;}
+    .paths-grid{grid-template-columns:1fr;}
+    .path-cell:first-child{border-right:none;border-bottom:1px solid var(--line);}
+    .poles{grid-template-columns:1fr;}
+    .shared-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;gap:36px;}
+    .foot-grid{grid-template-columns:1fr;gap:24px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn:hover{transform:none;}
+  }
+  :focus-visible{outline:2px solid var(--coral-deep);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#accueil" style="text-decoration:none;">
+      <svg viewBox="0 0 40 40" fill="none"><path d="M20 6c-2 4-6 4-6 9 0 3 2 5 4 6-3 1-6 4-6 8 0 1 .3 2 .7 3H27.3c.4-1 .7-2 .7-3 0-4-3-7-6-8 2-1 4-3 4-6 0-5-4-5-6-9Z" fill="#1B3A34"/><path d="M20 22v12" stroke="#1B3A34" stroke-width="1.4"/></svg>
+      <div>
+        <div class="brand-name">Cabinet Médical Bloc Carnot</div>
+        <div class="brand-sub">Dr Papa Amadou Ndiaye · Ophtalmologue — Dr Marième Ndiaye Soumaré · Pédiatre</div>
+      </div>
+    </a>
+    <nav class="navlinks">
+      <a href="#accueil">Accueil</a>
+      <a href="#soins">Nos soins</a>
+      <div class="nav-item" id="tarifsNavItem">
+        <a href="#tarifs">Nos tarifs<span class="caret"></span></a>
+        <div class="dropdown">
+          <div class="dropdown-group">
+            <h6>OPHTALMOLOGIE</h6>
+            <div class="dropdown-row"><span>Consultation / examen de la vue</span><span>[15 000 F]</span></div>
+            <div class="dropdown-row"><span>Dépistage strabisme / amblyopie</span><span>[15 000 F]</span></div>
+            <div class="dropdown-row"><span>Dépistage glaucome / cataracte</span><span>[20 000 F]</span></div>
+            <div class="dropdown-row"><span>Prescription lunettes / lentilles</span><span>[10 000 F]</span></div>
+          </div>
+          <div class="dropdown-group">
+            <h6>PÉDIATRIE</h6>
+            <div class="dropdown-row"><span>Consultation</span><span>[10 000 F]</span></div>
+            <div class="dropdown-row"><span>Examens complémentaires</span><span>[sur devis]</span></div>
+            <div class="dropdown-row"><span>Suivi médical</span><span>[10 000 F]</span></div>
+          </div>
+          <a class="dropdown-foot" href="#tarifs">Voir tous les tarifs</a>
+        </div>
+      </div>
+      <a href="#equipe">Équipe</a>
+      <a href="#horaires">Horaires & accès</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Prendre rendez-vous</a>
+  </div>
+</header>
+
+<section class="hero" id="accueil">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow-plain">Dakar — un seul local, deux soins de confiance</p>
+      <h1>La vue des parents, la santé des enfants, sous un même toit.</h1>
+      <p class="lead">Le Cabinet Médical Bloc Carnot réunit un cabinet d'ophtalmologie pour toute la famille et un cabinet de pédiatrie dans le même local, pour que vos rendez-vous ne vous fassent plus courir d'un bout de la ville à l'autre.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Prendre rendez-vous</a>
+        <a class="btn btn-ghost" href="tel:+221338226900">Appeler le cabinet</a>
+      </div>
+    </div>
+    <div class="hero-tree">
+      <svg viewBox="0 0 360 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="180" cy="360" rx="140" ry="14" fill="#EFE6D2"/>
+        <path d="M180 360V210" stroke="#1B3A34" stroke-width="10" stroke-linecap="round"/>
+        <path d="M180 240c-30-10-55-40-50-75" stroke="#1B3A34" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <path d="M180 230c34-8 62-38 58-74" stroke="#E8814A" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <circle cx="122" cy="150" r="58" fill="#2C6E5E"/>
+        <circle cx="90" cy="120" r="30" fill="#2C6E5E"/>
+        <circle cx="160" cy="110" r="26" fill="#2C6E5E"/>
+        <circle cx="246" cy="140" r="52" fill="#E8814A" opacity="0.9"/>
+        <circle cx="270" cy="105" r="26" fill="#E8814A" opacity="0.85"/>
+        <circle cx="215" cy="105" r="22" fill="#E8814A" opacity="0.85"/>
+        <ellipse cx="122" cy="150" rx="18" ry="11" fill="#F7F1E4"/>
+        <circle cx="122" cy="150" r="6" fill="#1B3A34"/>
+        <text x="112" y="180" font-family="Work Sans" font-size="12" fill="#1B3A34" text-anchor="middle" font-weight="600">Ophtalmologie</text>
+        <text x="248" y="142" font-family="Work Sans" font-size="12" fill="#1B3A34" text-anchor="middle" font-weight="600">Pédiatrie</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="paths">
+  <div class="wrap paths-grid">
+    <div class="path-cell">
+      <span class="num">01</span>
+      <div>
+        <h3>Un seul déplacement</h3>
+        <p>L'examen de la vue des parents et la visite médicale des enfants se prennent le même jour, dans la même salle d'attente.</p>
+      </div>
+    </div>
+    <div class="path-cell">
+      <span class="num">02</span>
+      <div>
+        <h3>Deux équipes, un dossier</h3>
+        <p>Nos praticiens échangent sur les antécédents familiaux quand c'est utile — vous ne répétez pas deux fois la même histoire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="soins">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Nos soins</p>
+      <h2>Deux cabinets, chacun avec ses repères</h2>
+      <p>Même si le local est partagé, chaque spécialité garde sa salle, son matériel et son rythme de consultation.</p>
+    </div>
+    <div class="poles">
+      <div class="pole pole-ophta">
+        <p class="pole-tag">CABINET D'OPHTALMOLOGIE</p>
+        <h3>Pour toute la famille</h3>
+        <p style="color:#000000;">Du contrôle de routine au dépistage précoce chez l'enfant, dans un cabinet équipé pour un examen complet de la vue.</p>
+        <ul>
+          <li>Examen de la vue et correction <span class="age">tous âges</span></li>
+          <li>Dépistage du strabisme et de l'amblyopie <span class="age">dès 6 mois</span></li>
+          <li>Dépistage du glaucome et de la cataracte <span class="age">adultes & seniors</span></li>
+          <li>Suivi du diabète oculaire <span class="age">adultes</span></li>
+          <li>Prescription de lunettes et lentilles <span class="age">tous âges</span></li>
+        </ul>
+      </div>
+      <div class="pole pole-pedia">
+        <p class="pole-tag">CABINET PÉDIATRIQUE</p>
+        <h3>De la naissance à l'adolescence</h3>
+        <p style="color:#000000;">Un suivi médical général pour l'enfant, dans un espace pensé pour que la visite chez le médecin reste un moment tranquille.</p>
+        <ul>
+          <li>Consultation <span class="age">naissance–ado.</span></li>
+          <li>Examens complémentaires <span class="age">naissance–ado.</span></li>
+          <li>Suivi médical <span class="age">naissance–ado.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shared">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Pourquoi le même local</p>
+      <h2>Pensé pour les familles de Dakar qui jonglent avec leur temps</h2>
+    </div>
+    <div class="shared-grid">
+      <div class="shared-item">
+        <span class="mark"></span>
+        <h4>Rendez-vous groupés</h4>
+        <p>Sur demande, nous alignons l'heure de votre examen de la vue et celle de la consultation pédiatrique de votre enfant.</p>
+      </div>
+      <div class="shared-item">
+        <span class="mark"></span>
+        <h4>Une seule salle d'attente</h4>
+        <p>Espace commun avec un coin dédié aux enfants, pour patienter sans que l'attente ne soit source de stress.</p>
+      </div>
+      <div class="shared-item">
+        <span class="mark"></span>
+        <h4>Un accueil, deux cabinets</h4>
+        <p>La réception oriente chaque patient vers le bon praticien et garde une trace simple de vos rendez-vous passés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tarifs" style="background:var(--sand-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Nos tarifs</p>
+      <h2>Le prix de chaque prestation, sans mauvaise surprise</h2>
+      <p>Tarifs indicatifs en francs CFA. Un devis précis peut être établi en cabinet selon votre situation.</p>
+    </div>
+    <div class="poles">
+      <div class="pole pole-ophta">
+        <p class="pole-tag">CABINET D'OPHTALMOLOGIE</p>
+        <h3>Tarifs</h3>
+        <ul>
+          <li>Consultation / examen de la vue <span class="age">[15 000 F]</span></li>
+          <li>Dépistage strabisme et amblyopie <span class="age">[15 000 F]</span></li>
+          <li>Dépistage glaucome et cataracte <span class="age">[20 000 F]</span></li>
+          <li>Suivi du diabète oculaire <span class="age">[15 000 F]</span></li>
+          <li>Prescription lunettes / lentilles <span class="age">[10 000 F]</span></li>
+        </ul>
+      </div>
+      <div class="pole pole-pedia">
+        <p class="pole-tag">CABINET PÉDIATRIQUE</p>
+        <h3>Tarifs</h3>
+        <ul>
+          <li>Consultation <span class="age">[10 000 F]</span></li>
+          <li>Examens complémentaires <span class="age">[sur devis]</span></li>
+          <li>Suivi médical <span class="age">[10 000 F]</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="equipe">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">L'équipe</p>
+      <h2>Des praticiens que vous reverrez à chaque visite</h2>
+      <p>Deux cabinets indépendants, réunis pour votre confort — vous gardez le même ophtalmologue et le même pédiatre à chaque rendez-vous.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <p class="role">CABINET D'OPHTALMOLOGIE</p>
+        <h3>Dr Papa Amadou Ndiaye</h3>
+        <p>Ophtalmologue à Dakar. Reçoit du lundi au samedi, sur rendez-vous.</p>
+      </div>
+      <div class="team-card">
+        <p class="role">CABINET PÉDIATRIQUE</p>
+        <h3>Dr Marième Ndiaye Soumaré</h3>
+        <p>Médecin spécialiste des enfants, de la naissance à l'adolescence. Consultation, examens complémentaires, suivi médical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="horaires" style="background:var(--sand-deep);">
+  <div class="wrap info-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:24px;">
+        <p class="kicker">Horaires</p>
+        <h2>Quand venir</h2>
+      </div>
+      <table class="hours-table">
+        <tr><td>Lundi – Vendredi</td><td>8h30 – 18h00</td></tr>
+        <tr><td>Samedi</td><td>9h00 – 13h00</td></tr>
+        <tr><td>Dimanche</td><td>Fermé</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="section-head" style="margin-bottom:24px;">
+        <p class="kicker">Accès</p>
+        <h2>Où nous trouver</h2>
+      </div>
+      <div class="addr-block">
+        <p><strong>Cabinet Médical Bloc Carnot</strong></p>
+        <p>93 Rue El Hadji Amadou Assane Ndoye, Dakar</p>
+        <p>Parking pour patients disponible</p>
+      </div>
+      <div style="margin-top:20px;border:1px solid var(--line);overflow:hidden;">
+        <iframe
+          src="https://maps.google.com/maps?q=93+Rue+El+Hadji+Amadou+Assane+Ndoye,+Dakar&output=embed"
+          width="100%" height="220" style="border:0;display:block;" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localisation du Cabinet Médical Bloc Carnot sur Google Maps"></iframe>
+      </div>
+      <a href="https://maps.app.goo.gl/sdK5Axqqvv57b3UcA" target="_blank" rel="noopener"
+         style="display:inline-block;margin-top:10px;font-size:0.9rem;color:var(--forest);text-decoration:underline;">
+        Ouvrir l'itinéraire sur Google Maps
+      </a>
+      <p style="margin:22px 0 6px;font-weight:600;color:var(--forest);">Cabinet d'ophtalmologie</p>
+      <div class="contact-row" style="margin-top:6px;">
+        <a class="btn btn-primary" href="https://wa.me/221338497800" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:+221338497800">+221 33 849 78 00</a>
+      </div>
+      <p style="margin:26px 0 6px;font-weight:600;color:var(--coral-deep);">Cabinet pédiatrique</p>
+      <div class="contact-row" style="margin-top:6px;">
+        <a class="btn btn-primary" href="https://wa.me/221778196826" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:+221338226900">+221 33 822 69 00</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2>Deux rendez-vous, un seul déplacement</h2>
+    <p>Appelez-nous ou écrivez-nous sur WhatsApp pour réserver une consultation d'ophtalmologie, de pédiatrie, ou les deux le même jour.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://wa.me/221338497800" target="_blank" rel="noopener">Ophtalmologie · WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+221338497800">Ophtalmologie · +221 33 849 78 00</a>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://wa.me/221778196826" target="_blank" rel="noopener">Pédiatrie · WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+221338226900">Pédiatrie · +221 33 822 69 00</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">Cabinet Médical Bloc Carnot</p>
+        <p style="max-width:38ch;">Cabinet d'ophtalmologie et cabinet pédiatrique réunis dans un même local, à Dakar.</p>
+        <p style="max-width:38ch;margin-top:10px;">93 Rue El Hadji Amadou Assane Ndoye, Dakar — <a href="https://maps.app.goo.gl/sdK5Axqqvv57b3UcA" target="_blank" rel="noopener" style="text-decoration:underline;">voir sur Google Maps</a></p>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#soins">Nos soins</a></li>
+          <li><a href="#equipe">Équipe</a></li>
+          <li><a href="#horaires">Horaires & accès</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Ophtalmologie</h5>
+        <ul>
+          <li><a href="tel:+221338497800">+221 33 849 78 00</a></li>
+          <li><a href="https://wa.me/221338497800" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Pédiatrie</h5>
+        <ul>
+          <li><a href="tel:+221338226900">+221 33 822 69 00</a></li>
+          <li><a href="https://wa.me/221778196826" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Cabinet Médical Bloc Carnot. Tous droits réservés.</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var item = document.getElementById('tarifsNavItem');
+    if(!item) return;
+    var link = item.querySelector('a');
+    link.addEventListener('click', function(e){
+      if(window.matchMedia('(hover: hover)').matches) return;
+      e.preventDefault();
+      item.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if(!item.contains(e.target)) item.classList.remove('open');
+    });
+  })();
+</script>
+
+</body>
+</html>
