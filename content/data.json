@@ -1,1 +1,99 @@
-
+{
+  "meta": {
+    "pageTitle": "Cabinet Médical Bloc Carnot — Ophtalmologie & Pédiatrie, Dakar"
+  },
+  "clinicName": "Cabinet Médical Bloc Carnot",
+  "brandSub": "Pr Papa Amadou Ndiaye · Ophtalmologue — Dr Marième Ndiaye Soumaré · Pédiatre",
+  "mainPhone": "+221338226900",
+  "hero": {
+    "eyebrow": "Dakar — un seul local, deux soins de confiance",
+    "title": "La vue des parents, la santé des enfants, sous un même toit.",
+    "lead": "Le Cabinet Médical Bloc Carnot réunit un cabinet d'ophtalmologie pour toute la famille et un cabinet de pédiatrie dans le même local, pour que vos rendez-vous ne vous fassent plus courir d'un bout de la ville à l'autre."
+  },
+  "paths": [
+    { "title": "Un seul déplacement", "text": "L'examen de la vue des parents et la visite médicale des enfants se prennent le même jour, dans la même salle d'attente." },
+    { "title": "Deux équipes, un dossier", "text": "Nos praticiens échangent sur les antécédents familiaux quand c'est utile — vous ne répétez pas deux fois la même histoire." }
+  ],
+  "soins": {
+    "kicker": "Nos soins",
+    "heading": "Deux cabinets, chacun avec ses repères",
+    "intro": "Même si le local est partagé, chaque spécialité garde sa salle, son matériel et son rythme de consultation.",
+    "ophta": {
+      "title": "Pour toute la famille",
+      "intro": "Du contrôle de routine au dépistage précoce chez l'enfant, dans un cabinet équipé pour un examen complet de la vue.",
+      "items": [
+        { "name": "Examen de la vue et correction", "age": "tous âges" },
+        { "name": "Dépistage du strabisme et de l'amblyopie", "age": "dès 6 mois" },
+        { "name": "Dépistage du glaucome et de la cataracte", "age": "adultes & seniors" },
+        { "name": "Suivi du diabète oculaire", "age": "adultes" },
+        { "name": "Prescription de lunettes et lentilles", "age": "tous âges" }
+      ]
+    },
+    "pedia": {
+      "title": "De la naissance à l'adolescence",
+      "intro": "Un suivi médical général pour l'enfant, dans un espace pensé pour que la visite chez le médecin reste un moment tranquille.",
+      "items": [
+        { "name": "Consultation", "age": "naissance–ado." },
+        { "name": "Examens complémentaires", "age": "naissance–ado." },
+        { "name": "Suivi médical", "age": "naissance–ado." }
+      ]
+    }
+  },
+  "shared": {
+    "kicker": "Pourquoi le même local",
+    "heading": "Pensé pour les familles de Dakar qui jonglent avec leur temps",
+    "items": [
+      { "title": "Rendez-vous groupés", "text": "Sur demande, nous alignons l'heure de votre examen de la vue et celle de la consultation pédiatrique de votre enfant." },
+      { "title": "Une seule salle d'attente", "text": "Espace commun avec un coin dédié aux enfants, pour patienter sans que l'attente ne soit source de stress." },
+      { "title": "Un accueil, deux cabinets", "text": "La réception oriente chaque patient vers le bon praticien et garde une trace simple de vos rendez-vous passés." }
+    ]
+  },
+  "tarifs": {
+    "kicker": "Nos tarifs",
+    "heading": "Le prix de chaque prestation, sans mauvaise surprise",
+    "intro": "Tarifs indicatifs en francs CFA. Un devis précis peut être établi en cabinet selon votre situation.",
+    "ophta": [
+      { "name": "Consultation / examen de la vue", "price": "15 000 F" },
+      { "name": "Dépistage strabisme et amblyopie", "price": "15 000 F" },
+      { "name": "Dépistage glaucome et cataracte", "price": "20 000 F" },
+      { "name": "Suivi du diabète oculaire", "price": "15 000 F" },
+      { "name": "Prescription lunettes / lentilles", "price": "10 000 F" }
+    ],
+    "pedia": [
+      { "name": "Consultation", "price": "10 000 F" },
+      { "name": "Examens complémentaires", "price": "sur devis" },
+      { "name": "Suivi médical", "price": "10 000 F" }
+    ]
+  },
+  "team": {
+    "kicker": "L'équipe",
+    "heading": "Des praticiens que vous reverrez à chaque visite",
+    "intro": "Deux cabinets indépendants, réunis pour votre confort — vous gardez le même ophtalmologue et le même pédiatre à chaque rendez-vous.",
+    "ophta": { "name": "Pr Papa Amadou Ndiaye", "blurb": "Ophtalmologue à Dakar. Reçoit du lundi au samedi, sur rendez-vous." },
+    "pedia": { "name": "Dr Marième Ndiaye Soumaré", "blurb": "Médecin spécialiste des enfants, de la naissance à l'adolescence. Consultation, examens complémentaires, suivi médical." }
+  },
+  "hours": [
+    { "day": "Lundi – Vendredi", "time": "8h30 – 18h00" },
+    { "day": "Samedi", "time": "9h00 – 13h00" },
+    { "day": "Dimanche", "time": "Fermé" }
+  ],
+  "address": {
+    "line1": "Cabinet Médical Bloc Carnot",
+    "line2": "93 Rue El Hadji Amadou Assane Ndoye, Dakar",
+    "note": "Parking pour patients disponible",
+    "mapsLink": "https://maps.app.goo.gl/sdK5Axqqvv57b3UcA",
+    "mapsEmbedQuery": "93 Rue El Hadji Amadou Assane Ndoye, Dakar"
+  },
+  "contact": {
+    "ophta": { "phone": "+221338497800", "phoneDisplay": "+221 33 849 78 00", "whatsapp": "221338497800" },
+    "pedia": { "phone": "+221338226900", "phoneDisplay": "+221 33 822 69 00", "whatsapp": "221778196826" }
+  },
+  "ctaBand": {
+    "heading": "Deux rendez-vous, un seul déplacement",
+    "text": "Appelez-nous ou écrivez-nous sur WhatsApp pour réserver une consultation d'ophtalmologie, de pédiatrie, ou les deux le même jour."
+  },
+  "footer": {
+    "tagline": "Cabinet d'ophtalmologie et cabinet pédiatrique réunis dans un même local, à Dakar.",
+    "copyright": "© 2026 Cabinet Médical Bloc Carnot. Tous droits réservés."
+  }
+}
