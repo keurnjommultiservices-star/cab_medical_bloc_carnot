@@ -199,6 +199,71 @@
   .gallery-placeholder svg{width:34px;height:34px;}
   .gallery-placeholder span{font-family:'Work Sans',sans-serif;font-size:12.5px;font-weight:600;}
   .gallery-caption{margin-top:12px;font-family:'Work Sans',sans-serif;font-size:14px;font-weight:600;color:var(--forest);text-align:center;}
+
+  /* Modale — réservation en ligne */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(27,58,52,0.55);
+    display:none;align-items:flex-start;justify-content:center;
+    padding:5vh 16px;z-index:200;overflow-y:auto;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--paper);border-radius:8px;max-width:480px;width:100%;
+    padding:28px 26px 30px;position:relative;
+    box-shadow:0 20px 50px rgba(27,58,52,0.35);
+  }
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;
+    border:none;background:var(--sand-deep);color:var(--forest);font-size:18px;line-height:1;
+    cursor:pointer;
+  }
+  .modal-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-right:30px;}
+  .modal-avatar{
+    width:52px;height:52px;border-radius:50%;background:var(--coral);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .modal-avatar svg{width:26px;height:26px;color:var(--paper);}
+  .modal-doc-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--forest);}
+  .modal-doc-role{color:var(--coral-deep);font-weight:600;font-size:0.88rem;margin-top:2px;}
+  .assistant-banner{
+    display:flex;align-items:center;gap:12px;
+    background:var(--sand-deep);border:1px solid var(--line);border-radius:6px;
+    padding:12px 14px;margin-bottom:16px;cursor:pointer;text-decoration:none;
+  }
+  .assistant-badge{
+    width:34px;height:34px;border-radius:50%;background:var(--forest);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;flex-shrink:0;
+  }
+  .assistant-name{font-weight:700;font-size:0.95rem;color:var(--forest);}
+  .assistant-tagline{font-size:0.82rem;color:#4a463d;margin-top:1px;}
+  .assistant-arrow{margin-left:auto;color:var(--forest);font-size:1.2rem;}
+  .modal-note{
+    background:#EFF3F1;border-radius:6px;padding:12px 14px;font-size:0.87rem;
+    color:#000000;margin-bottom:20px;line-height:1.5;
+  }
+  .rdv-field{display:block;font-weight:600;font-size:0.88rem;color:var(--forest);margin-bottom:18px;}
+  .rdv-field input,.rdv-field select,.rdv-field textarea{
+    display:block;width:100%;margin-top:7px;
+    border:1px solid var(--line);border-radius:5px;
+    padding:11px 12px;font-family:'Work Sans',sans-serif;font-size:0.95rem;color:#000000;
+    background:var(--paper);
+  }
+  .rdv-field textarea{resize:vertical;min-height:70px;}
+  .phone-row{display:flex;margin-top:7px;border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .phone-prefix{background:var(--sand-deep);padding:11px 12px;font-size:0.9rem;font-weight:600;color:var(--forest);white-space:nowrap;}
+  .phone-row input{border:none;margin:0;border-radius:0;flex:1;}
+  .dates-label{font-weight:600;font-size:0.88rem;color:var(--forest);margin-bottom:10px;}
+  .dates-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .chip{
+    border:1px solid var(--line);background:var(--paper);color:#000000;
+    padding:8px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;
+    cursor:pointer;font-family:'Work Sans',sans-serif;
+  }
+  .chip.chip-active{background:var(--forest);border-color:var(--forest);color:var(--paper);}
+  .modal-submit{width:100%;justify-content:center;font-size:1rem;padding:14px;}
+  .rdv-sent{display:none;text-align:center;padding:10px 0 4px;}
+  .rdv-sent svg{width:40px;height:40px;color:var(--forest);margin:0 auto 10px;}
+  .rdv-sent p{color:#000000;font-size:0.95rem;}
   .team-card{
     border:1px solid var(--line);background:var(--paper);padding:30px;
   }
@@ -527,6 +592,7 @@
         <p class="role">CABINET PÉDIATRIQUE</p>
         <h3 data-bind="team.pedia.name">Dr Marième Ndiaye Soumaré</h3>
         <p data-bind="team.pedia.blurb">Médecin spécialiste des enfants, de la naissance à l'adolescence. Consultation, examens complémentaires, suivi médical.</p>
+        <button type="button" class="btn btn-primary" id="openRdvBtn" style="margin-top:18px;">Réserver en ligne</button>
       </div>
     </div>
   </div>
@@ -632,6 +698,65 @@
   </div>
 </footer>
 
+<div class="modal-overlay" id="rdvModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="rdvDocName">
+    <button type="button" class="modal-close" id="rdvClose" aria-label="Fermer">&times;</button>
+
+    <div id="rdvFormWrap">
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-4 3.2-6.5 7-6.5S19 16 19 20"/></svg>
+        </div>
+        <div>
+          <div class="modal-doc-name" id="rdvDocName">Dr Marième Ndiaye Soumaré</div>
+          <div class="modal-doc-role">Pédiatrie</div>
+        </div>
+      </div>
+
+      <a class="assistant-banner" id="assistantBanner" href="#" target="_blank" rel="noopener">
+        <div class="assistant-badge" id="assistantInitial">A</div>
+        <div>
+          <div class="assistant-name">Parler à <span id="assistantName">notre assistante</span></div>
+          <div class="assistant-tagline" id="assistantTagline">elle organise votre rendez-vous</div>
+        </div>
+        <span class="assistant-arrow">›</span>
+      </a>
+
+      <p class="modal-note">Renseignez votre nom et votre numéro ci-dessous : nous vous mettons en relation et nous nous occupons d'organiser votre rendez-vous.</p>
+
+      <form id="rdvForm">
+        <label class="rdv-field">Nom complet *
+          <input type="text" id="rdvNom" required>
+        </label>
+        <label class="rdv-field">Téléphone *
+          <div class="phone-row">
+            <span class="phone-prefix">SN +221</span>
+            <input type="tel" id="rdvTel" required placeholder="77 123 45 67">
+          </div>
+        </label>
+        <label class="rdv-field">Service souhaité
+          <select id="rdvService">
+            <option value="">-- Choisir un service --</option>
+          </select>
+        </label>
+        <label class="rdv-field">Motif
+          <textarea id="rdvMotif" placeholder="Décrivez brièvement votre motif..."></textarea>
+        </label>
+        <div class="dates-label">Dates disponibles</div>
+        <div class="dates-chips" id="rdvDates">
+          <button type="button" class="chip chip-active" data-value="Flexible">Flexible</button>
+        </div>
+        <button type="submit" class="btn btn-primary modal-submit">Envoyer la demande</button>
+      </form>
+    </div>
+
+    <div class="rdv-sent" id="rdvSent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+      <p><strong>Demande envoyée sur WhatsApp.</strong><br>Notre assistante revient vers vous pour confirmer votre rendez-vous.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   // Menu déroulant "Nos tarifs" (fonctionne aussi au clic sur écran tactile)
   (function(){
@@ -687,6 +812,8 @@
         renderList('tarifsPediaList', get(data,'tarifs.pedia'), function(i){
           return '<li>'+i.name+' <span class="age">'+i.price+'</span></li>';
         });
+        window.__siteData = data;
+
         renderList('dropdownOphta', get(data,'tarifs.ophta'), function(i){
           return '<div class="dropdown-row"><span>'+i.name+'</span><span>'+i.price+'</span></div>';
         });
@@ -756,6 +883,135 @@
         }
       })
       .catch(function(){ /* le contenu déjà affiché dans la page sert de secours */ });
+  })();
+</script>
+
+<script>
+  // Réservation en ligne — Dr Marième Ndiaye Soumaré (pédiatrie)
+  (function(){
+    var openBtn = document.getElementById('openRdvBtn');
+    var modal = document.getElementById('rdvModal');
+    var closeBtn = document.getElementById('rdvClose');
+    var form = document.getElementById('rdvForm');
+    var formWrap = document.getElementById('rdvFormWrap');
+    var sentBox = document.getElementById('rdvSent');
+    var datesWrap = document.getElementById('rdvDates');
+    var serviceSelect = document.getElementById('rdvService');
+    var assistantBanner = document.getElementById('assistantBanner');
+    var assistantName = document.getElementById('assistantName');
+    var assistantTagline = document.getElementById('assistantTagline');
+    var assistantInitial = document.getElementById('assistantInitial');
+    if (!openBtn || !modal) return;
+
+    var selectedDate = 'Flexible';
+
+    function jourLabel(d){
+      var s = d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+      s = s.replace('.', '');
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function buildDateChips(){
+      var days = ['Flexible'];
+      var d = new Date();
+      while (days.length < 8) {
+        d.setDate(d.getDate() + 1);
+        if (d.getDay() !== 0) days.push(jourLabel(new Date(d))); // pas de dimanche
+      }
+      datesWrap.innerHTML = '';
+      days.forEach(function(label, idx){
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip' + (idx === 0 ? ' chip-active' : '');
+        chip.textContent = label;
+        chip.dataset.value = label;
+        chip.addEventListener('click', function(){
+          datesWrap.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('chip-active'); });
+          chip.classList.add('chip-active');
+          selectedDate = label;
+        });
+        datesWrap.appendChild(chip);
+      });
+      selectedDate = 'Flexible';
+    }
+
+    function fillServices(){
+      var data = window.__siteData;
+      serviceSelect.innerHTML = '<option value="">-- Choisir un service --</option>';
+      var items = (data && data.tarifs && data.tarifs.pedia) || [
+        { name: 'Consultation' }, { name: 'Examens complémentaires' }, { name: 'Suivi médical' }
+      ];
+      items.forEach(function(i){
+        var opt = document.createElement('option');
+        opt.value = i.name; opt.textContent = i.name;
+        serviceSelect.appendChild(opt);
+      });
+    }
+
+    function fillAssistant(){
+      var data = window.__siteData;
+      var a = (data && data.assistant) || {};
+      var name = a.name || 'notre assistante';
+      assistantName.textContent = name;
+      assistantTagline.textContent = a.tagline || 'elle organise votre rendez-vous';
+      assistantInitial.textContent = name.trim().charAt(0).toUpperCase() || 'A';
+      var wa = a.whatsapp || (data && data.contact && data.contact.pedia && data.contact.pedia.whatsapp) || '';
+      assistantBanner.href = wa ? ('https://wa.me/' + wa) : '#';
+    }
+
+    function openModal(){
+      fillServices();
+      fillAssistant();
+      buildDateChips();
+      formWrap.style.display = '';
+      sentBox.style.display = 'none';
+      form.reset();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = window.__siteData;
+      var nom = document.getElementById('rdvNom').value.trim();
+      var tel = document.getElementById('rdvTel').value.trim();
+      var service = serviceSelect.value;
+      var motif = document.getElementById('rdvMotif').value.trim();
+      if (!nom || !tel) return;
+
+      var a = (data && data.assistant) || {};
+      var waTarget = a.whatsapp || (data && data.contact && data.contact.pedia && data.contact.pedia.whatsapp) || '';
+
+      var lines = [
+        'Nouvelle demande de rendez-vous — Cabinet Médical Bloc Carnot',
+        'Pédiatrie · Dr Marième Ndiaye Soumaré',
+        '',
+        'Nom : ' + nom,
+        'Téléphone : +221 ' + tel,
+        'Service souhaité : ' + (service || 'Non précisé'),
+        'Motif : ' + (motif || 'Non précisé'),
+        'Date souhaitée : ' + selectedDate
+      ];
+      var text = encodeURIComponent(lines.join('\n'));
+
+      formWrap.style.display = 'none';
+      sentBox.style.display = 'block';
+
+      if (waTarget) {
+        window.open('https://wa.me/' + waTarget + '?text=' + text, '_blank');
+      }
+    });
   })();
 </script>
 
