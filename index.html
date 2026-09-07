@@ -150,7 +150,7 @@
 
   .section{padding:86px 0;}
   .section-head{max-width:640px;margin-bottom:52px;}
-  .section-head .kicker{color:var(--coral-deep);font-weight:600;font-size:0.92rem;margin-bottom:10px;}
+  .section-head .kicker{color:var(--coral-deep);font-weight:800;font-size:1.15rem;letter-spacing:0.02em;margin-bottom:12px;}
   .section-head h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;}
   .section-head p{margin-top:14px;color:#000000;font-size:1.02rem;}
 
@@ -539,7 +539,7 @@
 <section class="section" id="galerie" style="background:var(--sand-deep);">
   <div class="wrap">
     <div class="section-head">
-      <p class="kicker">Nos locaux</p>
+      <p class="kicker">Galerie</p>
       <h2>Le cabinet en images</h2>
       <p>Un aperçu des équipements et de l'accueil, pour que vous sachiez à quoi vous attendre en arrivant.</p>
     </div>
@@ -600,12 +600,15 @@
 </section>
 
 <section class="section" id="horaires" style="background:var(--sand-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Horaires & accès</p>
+      <h2>Quand venir, où nous trouver</h2>
+    </div>
+  </div>
   <div class="wrap info-grid">
     <div>
-      <div class="section-head" style="margin-bottom:24px;">
-        <p class="kicker">Horaires</p>
-        <h2>Quand venir</h2>
-      </div>
+      <h3 style="font-size:1.15rem;margin-bottom:8px;">Quand venir</h3>
       <table class="hours-table">
         <tbody id="hoursBody">
           <tr><td>Lundi – Vendredi</td><td>8h30 – 18h00</td></tr>
@@ -615,10 +618,7 @@
       </table>
     </div>
     <div>
-      <div class="section-head" style="margin-bottom:24px;">
-        <p class="kicker">Accès</p>
-        <h2>Où nous trouver</h2>
-      </div>
+      <h3 style="font-size:1.15rem;margin-bottom:8px;">Où nous trouver</h3>
       <div class="addr-block">
         <p><strong data-bind="address.line1">Cabinet Médical Bloc Carnot</strong></p>
         <p data-bind="address.line2">93 Rue El Hadji Amadou Assane Ndoye, Dakar</p>
@@ -651,6 +651,7 @@
 
 <section class="cta-band" id="contact">
   <div class="wrap">
+    <p class="kicker" style="color:var(--forest);text-align:center;">Contact</p>
     <h2 data-bind="ctaBand.heading">Deux rendez-vous, un seul déplacement</h2>
     <p data-bind="ctaBand.text">Appelez-nous ou écrivez-nous sur WhatsApp pour réserver une consultation d'ophtalmologie, de pédiatrie, ou les deux le même jour.</p>
     <div class="hero-ctas">
