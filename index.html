@@ -45,7 +45,7 @@
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;row-gap:10px;padding:16px 0;}
   .brand{display:flex;align-items:center;gap:12px;}
   .brand svg{width:32px;height:32px;flex-shrink:0;}
   .brand-name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:var(--forest);}
@@ -78,6 +78,7 @@
     padding:10px 18px;border-radius:3px;text-decoration:none;
     font-size:0.9rem;font-weight:500;
     white-space:nowrap;
+    margin-left:24px;flex-shrink:0;
   }
   .nav-cta:hover{background:var(--forest-light);}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;}
@@ -672,4 +673,13 @@
     var hasAuthToken = /invite_token|recovery_token|confirmation_token/.test(window.location.hash);
     if (hasAuthToken) {
       window.netlifyIdentity.on("init", function (user) {
-        window.netlify
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
