@@ -1,1 +1,176 @@
+backend:
+  name: git-gateway
+  branch: main
 
+media_folder: "images"
+public_folder: "/images"
+
+locale: "fr"
+
+collections:
+  - name: "site"
+    label: "Contenu du site"
+    files:
+      - name: "content"
+        label: "Contenu du Cabinet Médical Bloc Carnot"
+        file: "content/data.json"
+        fields:
+          - { label: "Nom de la clinique", name: "clinicName", widget: "string" }
+          - { label: "Sous-titre médecins (en-tête du site)", name: "brandSub", widget: "string" }
+          - { label: "Téléphone principal (bouton rapide Accueil)", name: "mainPhone", widget: "string" }
+
+          - label: "Onglet du navigateur"
+            name: "meta"
+            widget: "object"
+            fields:
+              - { label: "Titre de l'onglet", name: "pageTitle", widget: "string" }
+
+          - label: "Section Accueil"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Petite phrase au-dessus du titre", name: "eyebrow", widget: "string" }
+              - { label: "Titre principal", name: "title", widget: "string" }
+              - { label: "Texte d'introduction", name: "lead", widget: "text" }
+
+          - label: "Les deux points forts (bandeau 01 / 02)"
+            name: "paths"
+            widget: "list"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+
+          - label: "Section Nos soins"
+            name: "soins"
+            widget: "object"
+            fields:
+              - { label: "Étiquette (kicker)", name: "kicker", widget: "string" }
+              - { label: "Titre de section", name: "heading", widget: "string" }
+              - { label: "Texte d'intro", name: "intro", widget: "text" }
+              - label: "Cabinet d'ophtalmologie"
+                name: "ophta"
+                widget: "object"
+                fields:
+                  - { label: "Titre du bloc", name: "title", widget: "string" }
+                  - { label: "Texte d'intro", name: "intro", widget: "text" }
+                  - label: "Prestations"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - { label: "Nom de la prestation", name: "name", widget: "string" }
+                      - { label: "Âge concerné", name: "age", widget: "string" }
+              - label: "Cabinet pédiatrique"
+                name: "pedia"
+                widget: "object"
+                fields:
+                  - { label: "Titre du bloc", name: "title", widget: "string" }
+                  - { label: "Texte d'intro", name: "intro", widget: "text" }
+                  - label: "Prestations"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - { label: "Nom de la prestation", name: "name", widget: "string" }
+                      - { label: "Âge concerné", name: "age", widget: "string" }
+
+          - label: "Section Pourquoi le même local"
+            name: "shared"
+            widget: "object"
+            fields:
+              - { label: "Étiquette (kicker)", name: "kicker", widget: "string" }
+              - { label: "Titre de section", name: "heading", widget: "string" }
+              - label: "Raisons"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Texte", name: "text", widget: "text" }
+
+          - label: "Section Nos tarifs"
+            name: "tarifs"
+            widget: "object"
+            fields:
+              - { label: "Étiquette (kicker)", name: "kicker", widget: "string" }
+              - { label: "Titre de section", name: "heading", widget: "string" }
+              - { label: "Texte d'intro", name: "intro", widget: "text" }
+              - label: "Tarifs — Ophtalmologie"
+                name: "ophta"
+                widget: "list"
+                fields:
+                  - { label: "Prestation", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+              - label: "Tarifs — Pédiatrie"
+                name: "pedia"
+                widget: "list"
+                fields:
+                  - { label: "Prestation", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+
+          - label: "Section Équipe"
+            name: "team"
+            widget: "object"
+            fields:
+              - { label: "Étiquette (kicker)", name: "kicker", widget: "string" }
+              - { label: "Titre de section", name: "heading", widget: "string" }
+              - { label: "Texte d'intro", name: "intro", widget: "text" }
+              - label: "Médecin — Ophtalmologue"
+                name: "ophta"
+                widget: "object"
+                fields:
+                  - { label: "Nom", name: "name", widget: "string" }
+                  - { label: "Description", name: "blurb", widget: "text" }
+              - label: "Médecin — Pédiatre"
+                name: "pedia"
+                widget: "object"
+                fields:
+                  - { label: "Nom", name: "name", widget: "string" }
+                  - { label: "Description", name: "blurb", widget: "text" }
+
+          - label: "Horaires"
+            name: "hours"
+            widget: "list"
+            fields:
+              - { label: "Jour(s)", name: "day", widget: "string" }
+              - { label: "Horaire", name: "time", widget: "string" }
+
+          - label: "Adresse et carte"
+            name: "address"
+            widget: "object"
+            fields:
+              - { label: "Nom affiché", name: "line1", widget: "string" }
+              - { label: "Adresse complète", name: "line2", widget: "string" }
+              - { label: "Note (ex. parking)", name: "note", widget: "string" }
+              - { label: "Lien Google Maps (partage)", name: "mapsLink", widget: "string" }
+              - { label: "Adresse pour la carte intégrée", name: "mapsEmbedQuery", widget: "string" }
+
+          - label: "Contacts par cabinet"
+            name: "contact"
+            widget: "object"
+            fields:
+              - label: "Ophtalmologie"
+                name: "ophta"
+                widget: "object"
+                fields:
+                  - { label: "Téléphone (format international, ex. +221338497800)", name: "phone", widget: "string" }
+                  - { label: "Téléphone affiché", name: "phoneDisplay", widget: "string" }
+                  - { label: "WhatsApp (numéro sans + ni espaces, ex. 221338497800)", name: "whatsapp", widget: "string" }
+              - label: "Pédiatrie"
+                name: "pedia"
+                widget: "object"
+                fields:
+                  - { label: "Téléphone (format international)", name: "phone", widget: "string" }
+                  - { label: "Téléphone affiché", name: "phoneDisplay", widget: "string" }
+                  - { label: "WhatsApp (numéro sans + ni espaces)", name: "whatsapp", widget: "string" }
+
+          - label: "Bandeau de contact (bas de page)"
+            name: "ctaBand"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "heading", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+
+          - label: "Pied de page"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Phrase d'accroche", name: "tagline", widget: "text" }
+              - { label: "Mention de copyright", name: "copyright", widget: "string" }
