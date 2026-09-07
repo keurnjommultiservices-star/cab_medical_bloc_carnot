@@ -66,9 +66,8 @@
     ]
   },
   "assistant": {
-    "name": "",
-    "tagline": "elle organise votre rendez-vous",
-    "whatsapp": ""
+    "ophta": { "name": "", "tagline": "elle organise votre rendez-vous", "whatsapp": "" },
+    "pedia": { "name": "", "tagline": "elle organise votre rendez-vous", "whatsapp": "" }
   },
   "gallery": {
     "ophtaImage": "",
