@@ -105,13 +105,24 @@ collections:
                   - { label: "Prestation", name: "name", widget: "string" }
                   - { label: "Prix", name: "price", widget: "string" }
 
-          - label: "Assistante — Réservation en ligne (pédiatrie)"
+          - label: "Assistantes — Réservation en ligne"
             name: "assistant"
             widget: "object"
             fields:
-              - { label: "Nom de l'assistante", name: "name", widget: "string" }
-              - { label: "Phrase sous le nom", name: "tagline", widget: "string" }
-              - { label: "WhatsApp (numéro sans + ni espaces, ex. 221778196826)", name: "whatsapp", widget: "string" }
+              - label: "Assistante — Ophtalmologie"
+                name: "ophta"
+                widget: "object"
+                fields:
+                  - { label: "Nom de l'assistante", name: "name", widget: "string" }
+                  - { label: "Phrase sous le nom", name: "tagline", widget: "string" }
+                  - { label: "WhatsApp (numéro sans + ni espaces, ex. 221338497800)", name: "whatsapp", widget: "string" }
+              - label: "Assistante — Pédiatrie"
+                name: "pedia"
+                widget: "object"
+                fields:
+                  - { label: "Nom de l'assistante", name: "name", widget: "string" }
+                  - { label: "Phrase sous le nom", name: "tagline", widget: "string" }
+                  - { label: "WhatsApp (numéro sans + ni espaces, ex. 221778196826)", name: "whatsapp", widget: "string" }
 
           - label: "Galerie photos"
             name: "gallery"
