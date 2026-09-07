@@ -105,6 +105,17 @@ collections:
                   - { label: "Prestation", name: "name", widget: "string" }
                   - { label: "Prix", name: "price", widget: "string" }
 
+          - label: "Galerie photos"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Photo — Équipement ophtalmologie", name: "ophtaImage", widget: "image", required: false }
+              - { label: "Légende — Ophtalmologie", name: "ophtaCaption", widget: "string" }
+              - { label: "Photo — Équipement pédiatrie", name: "pediaImage", widget: "image", required: false }
+              - { label: "Légende — Pédiatrie", name: "pediaCaption", widget: "string" }
+              - { label: "Photo — Accueil / secrétariat", name: "accueilImage", widget: "image", required: false }
+              - { label: "Légende — Accueil", name: "accueilCaption", widget: "string" }
+
           - label: "Section Équipe"
             name: "team"
             widget: "object"
