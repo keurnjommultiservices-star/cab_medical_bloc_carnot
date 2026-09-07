@@ -587,12 +587,13 @@
         <p class="role">CABINET D'OPHTALMOLOGIE</p>
         <h3 data-bind="team.ophta.name">Pr Papa Amadou Ndiaye</h3>
         <p data-bind="team.ophta.blurb">Ophtalmologue à Dakar. Reçoit du lundi au samedi, sur rendez-vous.</p>
+        <button type="button" class="btn btn-primary" id="openRdvBtnOphta" data-cabinet="ophta" style="margin-top:18px;">Réserver en ligne</button>
       </div>
       <div class="team-card">
         <p class="role">CABINET PÉDIATRIQUE</p>
         <h3 data-bind="team.pedia.name">Dr Marième Ndiaye Soumaré</h3>
         <p data-bind="team.pedia.blurb">Médecin spécialiste des enfants, de la naissance à l'adolescence. Consultation, examens complémentaires, suivi médical.</p>
-        <button type="button" class="btn btn-primary" id="openRdvBtn" style="margin-top:18px;">Réserver en ligne</button>
+        <button type="button" class="btn btn-primary" id="openRdvBtnPedia" data-cabinet="pedia" style="margin-top:18px;">Réserver en ligne</button>
       </div>
     </div>
   </div>
@@ -887,9 +888,10 @@
 </script>
 
 <script>
-  // Réservation en ligne — Dr Marième Ndiaye Soumaré (pédiatrie)
+  // Réservation en ligne — Ophtalmologie & Pédiatrie
   (function(){
-    var openBtn = document.getElementById('openRdvBtn');
+    var openBtnOphta = document.getElementById('openRdvBtnOphta');
+    var openBtnPedia = document.getElementById('openRdvBtnPedia');
     var modal = document.getElementById('rdvModal');
     var closeBtn = document.getElementById('rdvClose');
     var form = document.getElementById('rdvForm');
@@ -901,9 +903,15 @@
     var assistantName = document.getElementById('assistantName');
     var assistantTagline = document.getElementById('assistantTagline');
     var assistantInitial = document.getElementById('assistantInitial');
-    if (!openBtn || !modal) return;
+    var docNameEl = document.getElementById('rdvDocName');
+    var docRoleEl = document.querySelector('.modal-doc-role');
+    if ((!openBtnOphta && !openBtnPedia) || !modal) return;
 
     var selectedDate = 'Flexible';
+    var currentCabinet = 'pedia';
+
+    var CABINET_LABEL = { ophta: "Ophtalmologie", pedia: "Pédiatrie" };
+    var DEFAULT_DOC_NAME = { ophta: "Pr Papa Amadou Ndiaye", pedia: "Dr Marième Ndiaye Soumaré" };
 
     function jourLabel(d){
       var s = d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
@@ -935,12 +943,13 @@
       selectedDate = 'Flexible';
     }
 
-    function fillServices(){
+    function fillServices(cabinet){
       var data = window.__siteData;
       serviceSelect.innerHTML = '<option value="">-- Choisir un service --</option>';
-      var items = (data && data.tarifs && data.tarifs.pedia) || [
-        { name: 'Consultation' }, { name: 'Examens complémentaires' }, { name: 'Suivi médical' }
-      ];
+      var fallback = cabinet === 'ophta'
+        ? [{ name: 'Consultation / examen de la vue' }, { name: 'Dépistage strabisme et amblyopie' }, { name: 'Dépistage glaucome et cataracte' }]
+        : [{ name: 'Consultation' }, { name: 'Examens complémentaires' }, { name: 'Suivi médical' }];
+      var items = (data && data.tarifs && data.tarifs[cabinet]) || fallback;
       items.forEach(function(i){
         var opt = document.createElement('option');
         opt.value = i.name; opt.textContent = i.name;
@@ -948,20 +957,29 @@
       });
     }
 
-    function fillAssistant(){
+    function fillAssistant(cabinet){
       var data = window.__siteData;
-      var a = (data && data.assistant) || {};
+      var a = (data && data.assistant && data.assistant[cabinet]) || {};
       var name = a.name || 'notre assistante';
       assistantName.textContent = name;
       assistantTagline.textContent = a.tagline || 'elle organise votre rendez-vous';
       assistantInitial.textContent = name.trim().charAt(0).toUpperCase() || 'A';
-      var wa = a.whatsapp || (data && data.contact && data.contact.pedia && data.contact.pedia.whatsapp) || '';
+      var wa = a.whatsapp || (data && data.contact && data.contact[cabinet] && data.contact[cabinet].whatsapp) || '';
       assistantBanner.href = wa ? ('https://wa.me/' + wa) : '#';
     }
 
-    function openModal(){
-      fillServices();
-      fillAssistant();
+    function fillDoctor(cabinet){
+      var data = window.__siteData;
+      var name = (data && data.team && data.team[cabinet] && data.team[cabinet].name) || DEFAULT_DOC_NAME[cabinet];
+      docNameEl.textContent = name;
+      docRoleEl.textContent = CABINET_LABEL[cabinet];
+    }
+
+    function openModal(cabinet){
+      currentCabinet = cabinet;
+      fillDoctor(cabinet);
+      fillServices(cabinet);
+      fillAssistant(cabinet);
       buildDateChips();
       formWrap.style.display = '';
       sentBox.style.display = 'none';
@@ -976,7 +994,8 @@
       document.body.style.overflow = '';
     }
 
-    openBtn.addEventListener('click', openModal);
+    if (openBtnOphta) openBtnOphta.addEventListener('click', function(){ openModal('ophta'); });
+    if (openBtnPedia) openBtnPedia.addEventListener('click', function(){ openModal('pedia'); });
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
@@ -990,12 +1009,13 @@
       var motif = document.getElementById('rdvMotif').value.trim();
       if (!nom || !tel) return;
 
-      var a = (data && data.assistant) || {};
-      var waTarget = a.whatsapp || (data && data.contact && data.contact.pedia && data.contact.pedia.whatsapp) || '';
+      var a = (data && data.assistant && data.assistant[currentCabinet]) || {};
+      var waTarget = a.whatsapp || (data && data.contact && data.contact[currentCabinet] && data.contact[currentCabinet].whatsapp) || '';
+      var docName = (data && data.team && data.team[currentCabinet] && data.team[currentCabinet].name) || DEFAULT_DOC_NAME[currentCabinet];
 
       var lines = [
         'Nouvelle demande de rendez-vous — Cabinet Médical Bloc Carnot',
-        'Pédiatrie · Dr Marième Ndiaye Soumaré',
+        CABINET_LABEL[currentCabinet] + ' · ' + docName,
         '',
         'Nom : ' + nom,
         'Téléphone : +221 ' + tel,
