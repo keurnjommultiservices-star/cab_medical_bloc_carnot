@@ -750,6 +750,10 @@
         <div class="dates-chips" id="rdvDates">
           <button type="button" class="chip chip-active" data-value="Flexible">Flexible</button>
         </div>
+        <div class="dates-label">Créneau horaire</div>
+        <div class="dates-chips" id="rdvSlots">
+          <button type="button" class="chip chip-active" data-value="Flexible">Flexible</button>
+        </div>
         <button type="submit" class="btn btn-primary modal-submit">Envoyer la demande</button>
       </form>
     </div>
@@ -901,6 +905,7 @@
     var formWrap = document.getElementById('rdvFormWrap');
     var sentBox = document.getElementById('rdvSent');
     var datesWrap = document.getElementById('rdvDates');
+    var slotsWrap = document.getElementById('rdvSlots');
     var serviceSelect = document.getElementById('rdvService');
     var assistantBanner = document.getElementById('assistantBanner');
     var assistantName = document.getElementById('assistantName');
@@ -911,15 +916,35 @@
     if ((!openBtnOphta && !openBtnPedia) || !modal) return;
 
     var selectedDate = 'Flexible';
+    var selectedSlot = 'Flexible';
     var currentCabinet = 'pedia';
 
     var CABINET_LABEL = { ophta: "Ophtalmologie", pedia: "Pédiatrie" };
     var DEFAULT_DOC_NAME = { ophta: "Pr Papa Amadou Ndiaye", pedia: "Dr Marième Ndiaye Soumaré" };
+    var TIME_SLOTS = ['Flexible', 'Matin (8h30 – 12h)', 'Début d\'après-midi (14h – 16h)', 'Fin de journée (16h – 18h)'];
 
     function jourLabel(d){
       var s = d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
       s = s.replace('.', '');
       return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function buildSlotChips(){
+      slotsWrap.innerHTML = '';
+      TIME_SLOTS.forEach(function(label, idx){
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip' + (idx === 0 ? ' chip-active' : '');
+        chip.textContent = label;
+        chip.dataset.value = label;
+        chip.addEventListener('click', function(){
+          slotsWrap.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('chip-active'); });
+          chip.classList.add('chip-active');
+          selectedSlot = label;
+        });
+        slotsWrap.appendChild(chip);
+      });
+      selectedSlot = 'Flexible';
     }
 
     function buildDateChips(){
@@ -984,6 +1009,7 @@
       fillServices(cabinet);
       fillAssistant(cabinet);
       buildDateChips();
+      buildSlotChips();
       formWrap.style.display = '';
       sentBox.style.display = 'none';
       form.reset();
@@ -1024,7 +1050,8 @@
         'Téléphone : +221 ' + tel,
         'Service souhaité : ' + (service || 'Non précisé'),
         'Motif : ' + (motif || 'Non précisé'),
-        'Date souhaitée : ' + selectedDate
+        'Date souhaitée : ' + selectedDate,
+        'Créneau souhaité : ' + selectedSlot
       ];
       var text = encodeURIComponent(lines.join('\n'));
 
